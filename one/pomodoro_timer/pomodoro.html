@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pomodoro Timer</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://unpkg.com/vue"></script>
+	<script type="text/javascript" src="pomodoro.js"></script>
+</head>
+<body>
+	<div id="app" class="container">
+		<h2>
+			<span>Pomodoro</span>
+			<button :disabled="state==='started'" @click="start()">
+				<i class="fa fa-play" aria-hidden="true"></i>
+			</button>
+			<button :disabled="state!=='started'" @click="pause()">
+				<i class="fa fa-pause" aria-hidden="true"></i>
+			</button>
+			<button :disabled="state!=='started' && state !== 'paused'" @click="stop()">
+				<i class="fa fa-stop" aria-hidden="true"></i>
+			</button>
+		</h2>
+		<h3>{{ title }}</h3>
+		<div class="card">
+			<div class="card-block pomodoro-timer">
+				<span>{{ min }}</span>:<span>{{ sec }}</span>
+			</div>
+		</div>
+		<div class="card" v-if="pomodoroState==='rest'">
+			<div class="card-block">
+				<img :src="'http://thecatapi.com/api/images/get?type=gif&size=med&ts='+timestamp"/>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
