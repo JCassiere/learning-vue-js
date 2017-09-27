@@ -28,4 +28,19 @@ describe('AddItemComponent.vue', () => {
 			})
 		})
 	})
+
+	describe('addItem', () => {
+		it('should call $emit method', () => {
+			let newItem = 'Learning Vue JS'
+			sinon.stub(component, '$emit')
+			sinon.stub(store, 'dispatch')
+			component.newItem = newItem
+			component.addItem()
+			expect(component.newItem).to.eql('')
+			expect(component.$emit).to.have.been.calledWith('add', newItem)
+			expect(store.dispatch).to.have.been.calledWith('updateList', 'niceId')
+			store.dispatch.restore()
+			component.$emit.restore()
+		})
+	})
 })
